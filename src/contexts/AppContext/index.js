@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import { BASE_API_URL } from '../../constants/endpoints';
+
 export const AppContext = React.createContext(true);
 
 class AppProvider extends Component {
@@ -17,21 +19,21 @@ class AppProvider extends Component {
 
   fetchRivals = () => {
     axios
-      .get('http://192.168.0.200:8080/rival')
+      .get(`${BASE_API_URL}/rival`)
       .then(response => this.setState({rivals: response.data}))
       .catch(err => console.log(err))
   };
 
   fetchMatches = () => {
     axios
-      .get('http://192.168.0.200:8080/match')
+      .get(`${BASE_API_URL}/match`)
       .then(response => this.setState({matches: response.data}))
       .catch(err => console.log(err))
   };
 
   createRival = (id, name, logo, cb) => {
     axios
-      .post('http://192.168.0.200:8080/rival/create', {id, name, logo})
+      .post(`${BASE_API_URL}/rival/create`, {id, name, logo})
       .then(({data}) => this.setState(prevState => {
         return {rivals: [data, ...prevState.rivals]}
       }))
@@ -41,7 +43,7 @@ class AppProvider extends Component {
 
   createMatch = (id, rivalId, place, startDateTime, cb) => {
     axios
-      .post('http://192.168.0.200:8080/match/create', {id, rivalId, place, startDateTime})
+      .post(`${BASE_API_URL}/match/create`, {id, rivalId, place, startDateTime})
       .then(({data}) => this.setState(prevState => {
         return {matches: [data, ...prevState.matches]}
       }))
@@ -51,7 +53,7 @@ class AppProvider extends Component {
 
   setMatchResults = (id, firstFive, score, twoScore, threeScore, tossing, cb) => {
     axios
-      .post(`http://192.168.0.200:8080/match/${id}/update`, {firstFive, score, twoScore, threeScore, tossing})
+      .post(`${BASE_API_URL}/match/${id}/update`, {firstFive, score, twoScore, threeScore, tossing})
       .then(({data}) => this.setState(prevState => {
         let matches = prevState.matches;
         const foundIndex = matches.findIndex(match => match.id === id);

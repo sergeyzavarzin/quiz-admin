@@ -223,7 +223,7 @@ class Matches extends React.Component {
               value: firstFive,
               errors: [new Error('Нельзя выбрать больше или меньше чем 5 игроков')],
             },
-          })
+          });
           return;
         }
         if (!err) {
