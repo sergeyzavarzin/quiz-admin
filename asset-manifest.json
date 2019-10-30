@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/quiz-admin/static/css/main.431e8c05.chunk.css",
+    "main.js": "/quiz-admin/static/js/main.662a16dd.chunk.js",
+    "main.js.map": "/quiz-admin/static/js/main.662a16dd.chunk.js.map",
+    "runtime-main.js": "/quiz-admin/static/js/runtime-main.a24853b2.js",
+    "runtime-main.js.map": "/quiz-admin/static/js/runtime-main.a24853b2.js.map",
+    "static/css/2.aa7fcd32.chunk.css": "/quiz-admin/static/css/2.aa7fcd32.chunk.css",
+    "static/js/2.14bae4c8.chunk.js": "/quiz-admin/static/js/2.14bae4c8.chunk.js",
+    "static/js/2.14bae4c8.chunk.js.map": "/quiz-admin/static/js/2.14bae4c8.chunk.js.map",
+    "index.html": "/quiz-admin/index.html",
+    "precache-manifest.7c89c7744d01261d256238096751f130.js": "/quiz-admin/precache-manifest.7c89c7744d01261d256238096751f130.js",
+    "service-worker.js": "/quiz-admin/service-worker.js",
+    "static/css/2.aa7fcd32.chunk.css.map": "/quiz-admin/static/css/2.aa7fcd32.chunk.css.map",
+    "static/css/main.431e8c05.chunk.css.map": "/quiz-admin/static/css/main.431e8c05.chunk.css.map",
+    "static/media/Abro_240x240.jpg": "/quiz-admin/static/media/Abro_240x240.53559671.jpg",
+    "static/media/Albicy_240x240.jpg": "/quiz-admin/static/media/Albicy_240x240.ca67f48b.jpg",
+    "static/media/Ayon_240x240.jpg": "/quiz-admin/static/media/Ayon_240x240.cfedbe27.jpg",
+    "static/media/Holli_240x240.jpg": "/quiz-admin/static/media/Holli_240x240.784d97d7.jpg",
+    "static/media/Iver_240x240.jpg": "/quiz-admin/static/media/Iver_240x240.a2c9df28.jpg",
+    "static/media/Khvo_240x240.jpg": "/quiz-admin/static/media/Khvo_240x240.9c283299.jpg",
+    "static/media/Poni_240x240.jpg": "/quiz-admin/static/media/Poni_240x240.e6ab6ed5.jpg",
+    "static/media/Ponkr_240x240.jpg": "/quiz-admin/static/media/Ponkr_240x240.4110abcc.jpg",
+    "static/media/Pukh_240x240.jpg": "/quiz-admin/static/media/Pukh_240x240.b701f28d.jpg",
+    "static/media/Renf_240x240.jpg": "/quiz-admin/static/media/Renf_240x240.72131066.jpg",
+    "static/media/Tom_240x240.jpg": "/quiz-admin/static/media/Tom_240x240.82c182d1.jpg",
+    "static/media/Tru_240x240.jpg": "/quiz-admin/static/media/Tru_240x240.001ce0de.jpg",
+    "static/media/Voron_240x240.jpg": "/quiz-admin/static/media/Voron_240x240.8836abf4.jpg",
+    "static/media/Zub_240x240.jpg": "/quiz-admin/static/media/Zub_240x240.1dad6f51.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a24853b2.js",
+    "static/css/2.aa7fcd32.chunk.css",
+    "static/js/2.14bae4c8.chunk.js",
+    "static/css/main.431e8c05.chunk.css",
+    "static/js/main.662a16dd.chunk.js"
+  ]
+}
