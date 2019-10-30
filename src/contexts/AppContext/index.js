@@ -29,14 +29,37 @@ class AppProvider extends Component {
       .catch(err => console.log(err))
   };
 
-  createRival = (id, name, logo, cb = () => 1) => {
+  createRival = (id, name, logo, cb) => {
     axios
       .post('http://192.168.0.200:8080/rival/create', {id, name, logo})
       .then(({data}) => this.setState(prevState => {
         return {rivals: [data, ...prevState.rivals]}
       }))
       .catch(err => console.log(err))
-      .finally(() => cb());
+      .finally(() => cb && cb());
+  };
+
+  createMatch = (id, rivalId, place, startDateTime, cb) => {
+    axios
+      .post('http://192.168.0.200:8080/match/create', {id, rivalId, place, startDateTime})
+      .then(({data}) => this.setState(prevState => {
+        return {matches: [data, ...prevState.matches]}
+      }))
+      .catch(err => console.log(err))
+      .finally(() => cb && cb());
+  };
+
+  setMatchResults = (id, firstFive, score, twoScore, threeScore, tossing, cb) => {
+    axios
+      .post(`http://192.168.0.200:8080/match/${id}/update`, {firstFive, score, twoScore, threeScore, tossing})
+      .then(({data}) => this.setState(prevState => {
+        let matches = prevState.matches;
+        const foundIndex = matches.findIndex(match => match.id === id);
+        matches[foundIndex] = data;
+        return {matches}
+      }))
+      .catch(err => console.log(err))
+      .finally(() => cb && cb());
   };
 
   render() {
@@ -47,6 +70,8 @@ class AppProvider extends Component {
           fetchMatches: this.fetchMatches,
           fetchRivals: this.fetchRivals,
           createRival: this.createRival,
+          createMatch: this.createMatch,
+          setMatchResults: this.setMatchResults,
         }}
       >
         {this.props.children}

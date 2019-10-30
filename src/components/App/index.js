@@ -18,6 +18,7 @@ const App = () => {
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['matches']}
+          defaultOpenKeys={['matches']}
           style={{ lineHeight: '64px' }}
         >
           <Item key="matches">
