@@ -1,7 +1,10 @@
 import React from 'react';
-import {Switch, Route, Link, HashRouter} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import "antd/dist/antd.css";
+
+import Matches from '../../pages/Matches';
+import Rivals from '../../pages/Rivals';
 
 const { Header, Content, Footer } = Layout;
 const { Item } = Menu;
@@ -29,8 +32,8 @@ const App = () => {
       </Header>
       <Content style={{ padding: '0 50px', marginTop: 64 }}>
         <div style={{ padding: 24, marginTop: 30, background: '#fff', minHeight: 360 }}>
-          <Route path='/matches' exact render={() => <div>Матчи</div>}/>
-          <Route path='/rivals' exact render={() => <div>Соперники</div>}/>
+          <Route path='/matches' exact component={Matches}/>
+          <Route path='/rivals' exact component={Rivals}/>
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>tweek4000@yandex.ru ©2019</Footer>

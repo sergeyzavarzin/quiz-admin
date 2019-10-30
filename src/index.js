@@ -4,11 +4,14 @@ import { HashRouter } from 'react-router-dom';
 import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import AppProvider from './contexts/AppContext';
 
 const Application = () => {
   return (
     <HashRouter>
-      <App/>
+      <AppProvider>
+        <App/>
+      </AppProvider>
     </HashRouter>
   )
 };
