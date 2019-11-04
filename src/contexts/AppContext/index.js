@@ -41,9 +41,9 @@ class AppProvider extends Component {
       .finally(() => cb && cb());
   };
 
-  createMatch = (id, rivalId, place, startDateTime, cb) => {
+  createMatch = (id, rivalId, place, startDateTime, buyTicketsUrl, cb) => {
     axios
-      .post(`${BASE_API_URL}/match/create`, {id, rivalId, place, startDateTime})
+      .post(`${BASE_API_URL}/match/create`, {id, rivalId, place, startDateTime, buyTicketsUrl})
       .then(({data}) => this.setState(prevState => {
         return {matches: [data, ...prevState.matches]}
       }))

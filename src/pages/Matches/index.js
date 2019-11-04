@@ -12,7 +12,7 @@ import './Matches.scss';
 
 const {Option} = Select;
 
-const DATE_FORMAT = 'DD.MM.YYYY HH:MM';
+const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
 
 const MODALS = {
   ADD_MATCH: 'ADD_MATCH',
@@ -135,17 +135,19 @@ class Matches extends React.Component {
     })
   };
 
+  disabledDate = (current) => current && current < moment().endOf('day');
+
   CreateMatchForm = Form.create({name: 'CreateMatchForm'})(({form}) => {
     const {getFieldDecorator, validateFields} = form;
     const {createMatch, state: {rivals}} = this.props.context;
     const handleCreateMatch = (e) => {
       e.preventDefault();
       this.setState({isMatchPosting: true});
-      validateFields((err, {rivalId, place, startDateTime}) => {
+      validateFields((err, {rivalId, place, startDateTime, buyTicketsUrl}) => {
         if (!err) {
           const FORMAT = 'DD-MM-YY-HH-MM-SS';
           const id = createTranslitId(`${rivals.find(rival => rival.id === rivalId).name}${moment(startDateTime).format(FORMAT)}`);
-          createMatch(id, rivalId, place, startDateTime, () => this.setState({
+          createMatch(id, rivalId, place, startDateTime, buyTicketsUrl, () => this.setState({
             isMatchPosting: false, activeModal: null
           }))
         }
@@ -175,9 +177,10 @@ class Matches extends React.Component {
           })(
             <DatePicker
               style={{width: '100%'}}
+              // disabledDate={this.disabledDate}
               format={DATE_FORMAT}
               placeholder='Выберите дату и время'
-              showTime
+              showTime={{ format: 'HH:mm', defaultValue: moment('20:00:00', 'HH:mm') }}
             />
           )}
         </Form.Item>
@@ -188,6 +191,14 @@ class Matches extends React.Component {
             <Input
               type="text"
               placeholder="Место проведения матча"
+            />,
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('buyTicketsUrl')(
+            <Input
+              type="text"
+              placeholder="Ссылка на покупку билета на матч"
             />,
           )}
         </Form.Item>
