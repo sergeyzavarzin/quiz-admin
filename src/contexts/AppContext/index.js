@@ -53,7 +53,7 @@ class AppProvider extends Component {
 
   setMatchResults = (id, firstFive, score, twoScore, threeScore, tossing, cb) => {
     axios
-      .post(`${BASE_API_URL}/match/${id}/update`, {firstFive, score, twoScore, threeScore, tossing: !!tossing})
+      .post(`${BASE_API_URL}/match/${id}/setresult`, {firstFive, score, twoScore, threeScore, tossing: !!tossing})
       .then(({data}) => this.setState(prevState => {
         let matches = prevState.matches;
         const foundIndex = matches.findIndex(match => match.id === id);

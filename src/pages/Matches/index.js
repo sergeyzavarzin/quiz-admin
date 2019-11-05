@@ -145,7 +145,7 @@ class Matches extends React.Component {
       this.setState({isMatchPosting: true});
       validateFields((err, {rivalId, place, startDateTime, buyTicketsUrl}) => {
         if (!err) {
-          const FORMAT = 'DD-MM-YY-HH-MM-SS';
+          const FORMAT = 'DD-MM-YY-HH-mm-ss';
           const id = createTranslitId(`${rivals.find(rival => rival.id === rivalId).name}${moment(startDateTime).format(FORMAT)}`);
           createMatch(id, rivalId, place, startDateTime, buyTicketsUrl, () => this.setState({
             isMatchPosting: false, activeModal: null
