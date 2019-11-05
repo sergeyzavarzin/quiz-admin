@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/quiz-admin/static/css/main.431e8c05.chunk.css",
-    "main.js": "/quiz-admin/static/js/main.3a5a273e.chunk.js",
-    "main.js.map": "/quiz-admin/static/js/main.3a5a273e.chunk.js.map",
+    "main.js": "/quiz-admin/static/js/main.a54cbb73.chunk.js",
+    "main.js.map": "/quiz-admin/static/js/main.a54cbb73.chunk.js.map",
     "runtime-main.js": "/quiz-admin/static/js/runtime-main.a24853b2.js",
     "runtime-main.js.map": "/quiz-admin/static/js/runtime-main.a24853b2.js.map",
     "static/css/2.aa7fcd32.chunk.css": "/quiz-admin/static/css/2.aa7fcd32.chunk.css",
     "static/js/2.14bae4c8.chunk.js": "/quiz-admin/static/js/2.14bae4c8.chunk.js",
     "static/js/2.14bae4c8.chunk.js.map": "/quiz-admin/static/js/2.14bae4c8.chunk.js.map",
     "index.html": "/quiz-admin/index.html",
-    "precache-manifest.195539e33c690e19c9a54e9f3dbe73ec.js": "/quiz-admin/precache-manifest.195539e33c690e19c9a54e9f3dbe73ec.js",
+    "precache-manifest.96a2ef00b07ee2e656c80f1677116f53.js": "/quiz-admin/precache-manifest.96a2ef00b07ee2e656c80f1677116f53.js",
     "service-worker.js": "/quiz-admin/service-worker.js",
     "static/css/2.aa7fcd32.chunk.css.map": "/quiz-admin/static/css/2.aa7fcd32.chunk.css.map",
     "static/css/main.431e8c05.chunk.css.map": "/quiz-admin/static/css/main.431e8c05.chunk.css.map",
@@ -33,6 +33,6 @@
     "static/css/2.aa7fcd32.chunk.css",
     "static/js/2.14bae4c8.chunk.js",
     "static/css/main.431e8c05.chunk.css",
-    "static/js/main.3a5a273e.chunk.js"
+    "static/js/main.a54cbb73.chunk.js"
   ]
 }
