@@ -8,27 +8,30 @@ export const AppContext = React.createContext(true);
 class AppProvider extends Component {
 
   state = {
+    isAppLoaded: false,
     rivals: [],
     matches: [],
   };
 
   componentDidMount() {
-    this.fetchMatches();
-    this.fetchRivals();
+    this.loadAppData();
   }
 
-  fetchRivals = () => {
-    axios
-      .get(`${BASE_API_URL}/rival`)
-      .then(response => this.setState({rivals: response.data}))
-      .catch(err => console.log(err))
+  loadAppData = () => {
+    const {fetchMatches, fetchRivals} = this;
+    Promise.all([fetchMatches(), fetchRivals()])
+      .then(([matches, rivals]) => this.setState({matches, rivals}))
+      .finally(() => this.setState({isAppLoaded: true}))
   };
 
-  fetchMatches = () => {
-    axios
-      .get(`${BASE_API_URL}/match`)
-      .then(response => this.setState({matches: response.data}))
-      .catch(err => console.log(err))
+  fetchRivals = async () => {
+    const rivals = await axios.get(`${BASE_API_URL}/rival`);
+    return rivals.data;
+  };
+
+  fetchMatches = async () => {
+    const matches = await axios.get(`${BASE_API_URL}/match`);
+    return matches.data;
   };
 
   createRival = (id, name, logo, cb) => {
@@ -36,6 +39,17 @@ class AppProvider extends Component {
       .post(`${BASE_API_URL}/rival/create`, {id, name, logo})
       .then(({data}) => this.setState(prevState => {
         return {rivals: [data, ...prevState.rivals]}
+      }))
+      .catch(err => console.log(err))
+      .finally(() => cb && cb());
+  };
+
+  editRival = (id, name, logo, cb) => {
+    axios
+      .post(`${BASE_API_URL}/rival/${id}/update`, {name, logo})
+      .then(({data}) => this.setState(({rivals}) => {
+        console.log(data, rivals.map(rival => rival.id === data.id ? data : rival))
+        return {rivals: rivals.map(rival => rival.id === data.id ? data : rival)}
       }))
       .catch(err => console.log(err))
       .finally(() => cb && cb());
@@ -72,6 +86,7 @@ class AppProvider extends Component {
           fetchMatches: this.fetchMatches,
           fetchRivals: this.fetchRivals,
           createRival: this.createRival,
+          editRival: this.editRival,
           createMatch: this.createMatch,
           setMatchResults: this.setMatchResults,
         }}

@@ -75,7 +75,7 @@ class Matches extends React.Component {
         render: (text, {firstFive}) => firstFive && firstFive.length ? <>
           {
             firstFive.map(playerId =>
-              <Tag>
+              <Tag key={playerId}>
                 {players.find(item => item.id === playerId).name}
               </Tag>
             )
@@ -376,11 +376,12 @@ class Matches extends React.Component {
 
   render() {
     const {activeModal} = this.state;
-    const {matches} = this.props.context.state;
+    const {matches, isAppLoaded} = this.props.context.state;
     const {CreateMatchForm, MatchResultsForm} = this;
     return (
       <div className='rivals'>
         <Table
+          loading={!isAppLoaded}
           dataSource={matches}
           columns={this.renderColumns()}
           rowKey={(record) => record.id}
