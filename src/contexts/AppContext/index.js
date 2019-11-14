@@ -11,6 +11,7 @@ class AppProvider extends Component {
     isAppLoaded: false,
     rivals: [],
     matches: [],
+    merch: [],
   };
 
   componentDidMount() {
@@ -18,9 +19,9 @@ class AppProvider extends Component {
   }
 
   loadAppData = () => {
-    const {fetchMatches, fetchRivals} = this;
-    Promise.all([fetchMatches(), fetchRivals()])
-      .then(([matches, rivals]) => this.setState({matches, rivals}))
+    const {fetchMatches, fetchRivals, fetchMerch} = this;
+    Promise.all([fetchMatches(), fetchRivals(), fetchMerch()])
+      .then(([matches, rivals, merch]) => this.setState({matches, rivals, merch}))
       .finally(() => this.setState({isAppLoaded: true}))
   };
 
@@ -32,6 +33,11 @@ class AppProvider extends Component {
   fetchMatches = async () => {
     const matches = await axios.get(`${BASE_API_URL}/match`);
     return matches.data;
+  };
+
+  fetchMerch = async () => {
+    const rivals = await axios.get(`${BASE_API_URL}/merch`);
+    return rivals.data;
   };
 
   createRival = (id, name, logo, cb) => {
@@ -83,8 +89,6 @@ class AppProvider extends Component {
       <AppContext.Provider
         value={{
           state: this.state,
-          fetchMatches: this.fetchMatches,
-          fetchRivals: this.fetchRivals,
           createRival: this.createRival,
           editRival: this.editRival,
           createMatch: this.createMatch,
