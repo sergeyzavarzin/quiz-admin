@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Button, Modal, Input} from 'antd';
+import {Table, Button, Modal, Input, Popconfirm} from 'antd';
 
 import {withAppContext} from '../../contexts/AppContext';
 
@@ -17,7 +17,8 @@ class Rivals extends React.Component {
   };
 
   columns = () => {
-    const {rivals} = this.props.context.state;
+    const {rivals, matches} = this.props.context.state;
+    const {deleteRival} = this.props.context;
     return [
       {
         title: 'Название',
@@ -44,6 +45,17 @@ class Rivals extends React.Component {
           >
             Редактировать
           </Button>
+          {
+            !matches.some(match => match.rivalId === record.id) &&
+            <Popconfirm
+              title='Вы уверены?'
+              okText='Да'
+              cancelText='Нет'
+              onConfirm={() => deleteRival(record.id)}
+            >
+              <Button type='danger'>Удалить</Button>
+            </Popconfirm>
+          }
         </>
       }
     ]
@@ -61,8 +73,8 @@ class Rivals extends React.Component {
   handleModalOk = () => {
     const {state, props, onModalClose} = this;
     const {name, logo, editingRivalId} = state;
-    const {createRival, editRival} = props.context;
-    const action = editingRivalId ? editRival : createRival;
+    const {createRival, updateRival} = props.context;
+    const action = editingRivalId ? updateRival : createRival;
     action(editingRivalId || createTranslitId(name), name, logo, onModalClose)
   };
 

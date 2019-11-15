@@ -50,12 +50,21 @@ class AppProvider extends Component {
       .finally(() => cb && cb());
   };
 
-  editRival = (id, name, logo, cb) => {
+  updateRival = (id, name, logo, cb) => {
     axios
       .post(`${BASE_API_URL}/rival/${id}/update`, {name, logo})
       .then(({data}) => this.setState(({rivals}) => {
-        console.log(data, rivals.map(rival => rival.id === data.id ? data : rival))
         return {rivals: rivals.map(rival => rival.id === data.id ? data : rival)}
+      }))
+      .catch(err => console.log(err))
+      .finally(() => cb && cb());
+  };
+
+  updateMerch = (id, name, image, price, description, type, cb) => {
+    axios
+      .post(`${BASE_API_URL}/merch/${id}/update`, {name, image, price, description, type})
+      .then(({data}) => this.setState(({merch}) => {
+        return {merch: merch.map(item => item.id === data.id ? data : item)}
       }))
       .catch(err => console.log(err))
       .finally(() => cb && cb());
@@ -69,6 +78,46 @@ class AppProvider extends Component {
       }))
       .catch(err => console.log(err))
       .finally(() => cb && cb());
+  };
+
+  createMerch = (id, name, image, price, description, type, cb) => {
+    axios
+      .post(`${BASE_API_URL}/merch/create`, {id, name, image, price, description, type})
+      .then(({data}) => this.setState(prevState => {
+        return {merch: [data, ...prevState.merch]}
+      }))
+      .catch(err => console.log(err))
+      .finally(() => cb && cb());
+  };
+
+  deleteMatch = (id) => {
+    axios
+      .post(`${BASE_API_URL}/match/${id}/delete`)
+      .then(() => this.setState(({matches}) => {
+        return {
+          matches: matches.filter(item => item.id !== id)
+        }
+      }))
+  };
+
+  deleteRival= (id) => {
+    axios
+      .post(`${BASE_API_URL}/rival/${id}/delete`)
+      .then(() => this.setState(({rivals}) => {
+        return {
+          rivals: rivals.filter(item => item.id !== id)
+        }
+      }))
+  };
+
+  deleteMerch = (id) => {
+    axios
+      .post(`${BASE_API_URL}/merch/${id}/delete`)
+      .then(() => this.setState(({merch}) => {
+        return {
+          merch: merch.filter(item => item.id !== id)
+        }
+      }))
   };
 
   setMatchResults = (id, firstFive, score, twoScore, threeScore, tossing, cb) => {
@@ -89,9 +138,18 @@ class AppProvider extends Component {
       <AppContext.Provider
         value={{
           state: this.state,
+
           createRival: this.createRival,
-          editRival: this.editRival,
           createMatch: this.createMatch,
+          createMerch: this.createMerch,
+
+          updateRival: this.updateRival,
+          updateMerch: this.updateMerch,
+
+          deleteMerch: this.deleteMerch,
+          deleteMatch: this.deleteMatch,
+          deleteRival: this.deleteRival,
+
           setMatchResults: this.setMatchResults,
         }}
       >

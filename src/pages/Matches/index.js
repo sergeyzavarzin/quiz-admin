@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Button, Modal, Input, Form, Select, DatePicker, Tag, Icon} from 'antd';
+import {Table, Button, Modal, Input, Form, Select, DatePicker, Tag, Icon, Popconfirm} from 'antd';
 import moment from 'moment';
 
 import createTranslitId from '../../utils/createTranslitId';
@@ -28,6 +28,7 @@ class Matches extends React.Component {
   };
 
   renderColumns = () => {
+    const {deleteMatch} = this.props.context;
     return [
       {
         title: 'Соперник',
@@ -121,9 +122,18 @@ class Matches extends React.Component {
               activeModal: MODALS.EDIT_MATCH,
               selectedMatch: record.id,
             })}
+            style={{marginRight: 15}}
           >
             Объявить результат
           </Button>
+          <Popconfirm
+            title='Вы уверены?'
+            okText='Да'
+            cancelText='Нет'
+            onConfirm={() => deleteMatch(record.id)}
+          >
+            <Button type='danger'>Удалить</Button>
+          </Popconfirm>
         </>
       },
     ];

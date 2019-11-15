@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter, Route, Link} from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-import "antd/dist/antd.css";
+import 'antd/dist/antd.css';
 
 import Matches from '../../pages/Matches';
 import Rivals from '../../pages/Rivals';
@@ -12,23 +12,23 @@ const { Item } = Menu;
 
 const App = ({location: {pathname}}) => {
   return (
-    <Layout>
+    <Layout style={{minHeight: '100vh'}}>
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-        <div className="logo" />
+        <div className='logo' />
         <Menu
-          theme="dark"
-          mode="horizontal"
+          theme='dark'
+          mode='horizontal'
           defaultSelectedKeys={[pathname.slice(1)]}
           defaultOpenKeys={[pathname.slice(1)]}
           style={{ lineHeight: '64px' }}
         >
-          <Item key="matches">
+          <Item key='matches'>
             <Link to='/matches'>Матчи</Link>
           </Item>
-          <Item key="rivals">
+          <Item key='rivals'>
             <Link to='/rivals'>Соперники</Link>
           </Item>
-          <Item key="merch">
+          <Item key='merch'>
             <Link to='/merch'>Товары</Link>
           </Item>
         </Menu>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Button, Modal, Input, Select} from 'antd';
+import {Table, Button, Modal, Input, Select, Popconfirm} from 'antd';
 
 import {withAppContext} from '../../contexts/AppContext';
 
@@ -60,22 +60,18 @@ class Merch extends React.Component {
         render: (text, record) => <>
           <Button
             style={{marginRight: 15}}
-            onClick={() => this.setState({
-              editingMerchId: record.id,
-              isModalVisible: true,
-              name: merch.find(item => item.id === record.id).name,
-              image: merch.find(item => item.id === record.id).image,
-            })}
+            onClick={() => this.editMerch(record.id)}
           >
             Редактировать
           </Button>
-          <Button
-            type='danger'
-            style={{marginRight: 15}}
-            onClick={() => deleteMerch(record.id)}
+          <Popconfirm
+            title='Вы уверены?'
+            okText='Да'
+            cancelText='Нет'
+            onConfirm={() => deleteMerch(record.id)}
           >
-            Удалить
-          </Button>
+            <Button type='danger'>Удалить</Button>
+          </Popconfirm>
         </>
       }
     ]
@@ -89,16 +85,30 @@ class Merch extends React.Component {
       image: '',
       price: '',
       description: '',
-      type: TYPES.PHYSICAL,
+      type: '',
     })
   };
 
   handleModalOk = () => {
     const {state, props, onModalClose} = this;
-    const {name, image, editingMerchId} = state;
-    const {createMerch, editMerch} = props.context;
-    const action = editingMerchId ? editMerch : createMerch;
-    action(editingMerchId || createTranslitId(name), name, image, onModalClose)
+    const {name, image, price, description, type, editingMerchId} = state;
+    const {createMerch, updateMerch} = props.context;
+    const action = editingMerchId ? updateMerch : createMerch;
+    action(editingMerchId || createTranslitId(name), name, image, price, description, type, onModalClose)
+  };
+
+  editMerch = id => {
+    const {merch} = this.props.context.state;
+    const {name, image, description, price, type} = merch.find(item => item.id === id);
+    this.setState({
+      editingMerchId: id,
+      name,
+      image,
+      description,
+      price,
+      type,
+      isModalVisible: true,
+    })
   };
 
   render() {
