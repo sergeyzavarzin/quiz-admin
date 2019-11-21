@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { BASE_API_URL } from '../../constants/endpoints';
 
+import {TYPES} from '../../constants/merchTypes';
+
 export const AppContext = React.createContext(true);
 
 class AppProvider extends Component {
@@ -60,7 +62,7 @@ class AppProvider extends Component {
       .finally(() => cb && cb());
   };
 
-  updateMerch = (id, name, image, price, description, type, cb) => {
+  updateMerch = (id, name, image, price, description, type, cb = null) => {
     axios
       .post(`${BASE_API_URL}/merch/${id}/update`, {name, image, price, description, type})
       .then(({data}) => this.setState(({merch}) => {
@@ -70,7 +72,7 @@ class AppProvider extends Component {
       .finally(() => cb && cb());
   };
 
-  createMatch = (id, rivalId, place, startDateTime, buyTicketsUrl, cb) => {
+  createMatch = (id, rivalId, place, startDateTime, buyTicketsUrl, cb = null) => {
     axios
       .post(`${BASE_API_URL}/match/create`, {id, rivalId, place, startDateTime, buyTicketsUrl})
       .then(({data}) => this.setState(prevState => {
@@ -80,14 +82,29 @@ class AppProvider extends Component {
       .finally(() => cb && cb());
   };
 
-  createMerch = (id, name, image, price, description, type, cb) => {
+  createMerch = (id, name, image, price, description, type, values, count, cb = null) => {
+    const data = {id, name, image, price, description, type, count};
     axios
-      .post(`${BASE_API_URL}/merch/create`, {id, name, image, price, description, type})
+      .post(`${BASE_API_URL}/merch/create`, data)
       .then(({data}) => this.setState(prevState => {
         return {merch: [data, ...prevState.merch]}
-      }))
-      .catch(err => console.log(err))
-      .finally(() => cb && cb());
+      }, () => type === TYPES.DIGITAL ?
+        this.createDigitalMerchValues(id, values, cb) : (!!cb && cb())
+      ))
+      .catch(err => console.log(err));
+  };
+
+  createDigitalMerchValues = (id, values, cb = null) => {
+    const items = values.map(item => {
+      return {
+        merchId: id,
+        orderId: 'null',
+        value: item,
+      }
+    });
+    axios
+      .post(`${BASE_API_URL}/digital`, {items})
+      .finally(() => !!cb && cb())
   };
 
   deleteMatch = (id) => {

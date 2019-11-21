@@ -106,9 +106,9 @@ class Matches extends React.Component {
         dataIndex: 'tossing',
         render: (text, {score, tossing}) => score && score.length ?
           <Icon
-            theme="twoTone"
-            type={!!tossing ? "check-circle" : "close-circle"}
-            twoToneColor={!!tossing ? "#52c41a" : "red"}
+            theme='twoTone'
+            type={!!tossing ? 'check-circle' : 'close-circle'}
+            twoToneColor={!!tossing ? '#52c41a' : 'red'}
             style={{fontSize: '28px'}}
           /> : <></>
       },
@@ -145,8 +145,6 @@ class Matches extends React.Component {
     })
   };
 
-  disabledDate = (current) => current && current < moment().endOf('day');
-
   CreateMatchForm = Form.create({name: 'CreateMatchForm'})(({form}) => {
     const {getFieldDecorator, validateFields} = form;
     const {createMatch, state: {rivals}} = this.props.context;
@@ -164,15 +162,15 @@ class Matches extends React.Component {
       });
     };
     return (
-      <Form onSubmit={handleCreateMatch} className="create-match">
+      <Form onSubmit={handleCreateMatch} className='create-match'>
         <Form.Item>
           {getFieldDecorator('rivalId', {
             rules: [{required: true, message: 'Выберите соперника'}],
           })(
             <Select
-              placeholder="Выберите соперинка"
+              placeholder='Выберите соперинка'
               showSearch
-              optionFilterProp="children"
+              optionFilterProp='children'
               filterOption={(input, option) =>
                 option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
@@ -187,7 +185,6 @@ class Matches extends React.Component {
           })(
             <DatePicker
               style={{width: '100%'}}
-              // disabledDate={this.disabledDate}
               format={DATE_FORMAT}
               placeholder='Выберите дату и время'
               showTime={{ format: 'HH:mm', defaultValue: moment('20:00:00', 'HH:mm') }}
@@ -199,24 +196,24 @@ class Matches extends React.Component {
             rules: [{required: true, message: 'Укажите место проведения'}],
           })(
             <Input
-              type="text"
-              placeholder="Место проведения матча"
+              type='text'
+              placeholder='Место проведения матча'
             />,
           )}
         </Form.Item>
         <Form.Item>
           {getFieldDecorator('buyTicketsUrl')(
             <Input
-              type="text"
-              placeholder="Ссылка на покупку билета на матч"
+              type='text'
+              placeholder='Ссылка на покупку билета на матч'
             />,
           )}
         </Form.Item>
         <Form.Item>
           <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
+            type='primary'
+            htmlType='submit'
+            className='login-form-button'
             block
           >
             Создать матч
@@ -255,7 +252,7 @@ class Matches extends React.Component {
       });
     };
     return (
-      <Form onSubmit={handleUpdateMatch} className="create-match">
+      <Form onSubmit={handleUpdateMatch} className='create-match'>
         <Form.Item>
           <Input
             disabled
@@ -283,7 +280,7 @@ class Matches extends React.Component {
           })(
             <Select
               placeholder='Стартовая пятерка'
-              mode="tags"
+              mode='tags'
             >
               {
                 players.map(player =>
@@ -302,8 +299,8 @@ class Matches extends React.Component {
             rules: [{required: true, message: 'Укажите кто выиграл вбрасывание'}],
           })(
             <Select
-              type="text"
-              placeholder="Вбрасывание выиграла команда"
+              type='text'
+              placeholder='Вбрасывание выиграла команда'
             >
               <Option key={0}>Зенит</Option>
               <Option key={1}>{rival.name}</Option>
@@ -354,8 +351,8 @@ class Matches extends React.Component {
               rules: [{required: true, message: 'Укажите место проведения'}],
             })(
               <Input
-                type="number"
-                placeholder="Зенит"
+                type='number'
+                placeholder='Зенит'
                 style={{width: '50%'}}
               />,
             )}
@@ -363,7 +360,7 @@ class Matches extends React.Component {
               rules: [{required: true, message: 'Укажите место проведения'}],
             })(
               <Input
-                type="number"
+                type='number'
                 placeholder={rival.name}
                 style={{width: '50%'}}
               />,
@@ -372,9 +369,8 @@ class Matches extends React.Component {
         </Form.Item>
         <Form.Item>
           <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
+            type='primary'
+            htmlType='submit'
             block
           >
             Объявить результат
@@ -404,7 +400,7 @@ class Matches extends React.Component {
           Добавить
         </Button>
         <Modal
-          title="Добавить матч"
+          title='Добавить матч'
           visible={activeModal === MODALS.ADD_MATCH}
           onCancel={this.onModalClose}
           footer={false}
@@ -412,7 +408,7 @@ class Matches extends React.Component {
           <CreateMatchForm/>
         </Modal>
         <Modal
-          title="Итоги матча"
+          title='Итоги матча'
           visible={activeModal === MODALS.EDIT_MATCH}
           onCancel={this.onModalClose}
           footer={false}
