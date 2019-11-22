@@ -128,7 +128,7 @@ class Merch extends React.Component {
             rules: [{required: true, message: 'Введите описание товара'}],
             initialValue: description || '',
           })(
-            <Input.TextArea  placeholder='Описание'/>
+            <Input.TextArea placeholder='Описание'/>
           )}
         </Form.Item>
         <Form.Item>
@@ -145,14 +145,21 @@ class Merch extends React.Component {
           )}
         </Form.Item>
         {
-          isDigital &&
-          <Form.Item>
-            {getFieldDecorator('values', {
-              rules: [{required: true, message: 'Задайте хотя бы одно значение'}],
-            })(
-              <Select mode='tags' placeholder='Значения'/>
-            )}
-          </Form.Item>
+          isDigital ?
+            <Form.Item>
+              {getFieldDecorator('values', {
+                rules: [{required: true, message: 'Задайте хотя бы одно значение'}],
+              })(
+                <Select mode='tags' placeholder='Значения'/>
+              )}
+            </Form.Item> :
+            <Form.Item>
+              {getFieldDecorator('count', {
+                rules: [{required: true, message: 'Задайте количество товара'}],
+              })(
+                <InputNumber placeholder='Количество' style={{width: '100%'}}/>
+              )}
+            </Form.Item>
         }
         <Form.Item>
           <Button
