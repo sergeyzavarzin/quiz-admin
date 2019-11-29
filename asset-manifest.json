@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/quiz-admin/static/css/main.9604ec3f.chunk.css",
-    "main.js": "/quiz-admin/static/js/main.4e7f2b5c.chunk.js",
-    "main.js.map": "/quiz-admin/static/js/main.4e7f2b5c.chunk.js.map",
+    "main.css": "/quiz-admin/static/css/main.b6facf83.chunk.css",
+    "main.js": "/quiz-admin/static/js/main.23934e8e.chunk.js",
+    "main.js.map": "/quiz-admin/static/js/main.23934e8e.chunk.js.map",
     "runtime-main.js": "/quiz-admin/static/js/runtime-main.a24853b2.js",
     "runtime-main.js.map": "/quiz-admin/static/js/runtime-main.a24853b2.js.map",
     "static/css/2.aa7fcd32.chunk.css": "/quiz-admin/static/css/2.aa7fcd32.chunk.css",
-    "static/js/2.236db250.chunk.js": "/quiz-admin/static/js/2.236db250.chunk.js",
-    "static/js/2.236db250.chunk.js.map": "/quiz-admin/static/js/2.236db250.chunk.js.map",
+    "static/js/2.ffaef1df.chunk.js": "/quiz-admin/static/js/2.ffaef1df.chunk.js",
+    "static/js/2.ffaef1df.chunk.js.map": "/quiz-admin/static/js/2.ffaef1df.chunk.js.map",
     "index.html": "/quiz-admin/index.html",
-    "precache-manifest.01201ed692f39cb403ec69f963d906e4.js": "/quiz-admin/precache-manifest.01201ed692f39cb403ec69f963d906e4.js",
+    "precache-manifest.c02cac2d62f1f7dae3a15a27a9d2f019.js": "/quiz-admin/precache-manifest.c02cac2d62f1f7dae3a15a27a9d2f019.js",
     "service-worker.js": "/quiz-admin/service-worker.js",
     "static/css/2.aa7fcd32.chunk.css.map": "/quiz-admin/static/css/2.aa7fcd32.chunk.css.map",
-    "static/css/main.9604ec3f.chunk.css.map": "/quiz-admin/static/css/main.9604ec3f.chunk.css.map",
+    "static/css/main.b6facf83.chunk.css.map": "/quiz-admin/static/css/main.b6facf83.chunk.css.map",
     "static/media/Abro_240x240.jpg": "/quiz-admin/static/media/Abro_240x240.53559671.jpg",
     "static/media/Albicy_240x240.jpg": "/quiz-admin/static/media/Albicy_240x240.ca67f48b.jpg",
     "static/media/Ayon_240x240.jpg": "/quiz-admin/static/media/Ayon_240x240.cfedbe27.jpg",
@@ -32,8 +32,8 @@
   "entrypoints": [
     "static/js/runtime-main.a24853b2.js",
     "static/css/2.aa7fcd32.chunk.css",
-    "static/js/2.236db250.chunk.js",
-    "static/css/main.9604ec3f.chunk.css",
-    "static/js/main.4e7f2b5c.chunk.js"
+    "static/js/2.ffaef1df.chunk.js",
+    "static/css/main.b6facf83.chunk.css",
+    "static/js/main.23934e8e.chunk.js"
   ]
 }
