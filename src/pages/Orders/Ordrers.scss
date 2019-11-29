@@ -1,0 +1,20 @@
+.orders {
+
+}
+
+.order {
+  &__merch {
+  }
+
+  &__info {
+    div {
+      padding: 10px;
+    }
+  }
+
+  &__image {
+    max-width: 60px;
+    display: inline-block;
+    margin-right: 15px;
+  }
+}

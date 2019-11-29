@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import Matches from '../../pages/Matches';
 import Rivals from '../../pages/Rivals';
 import Merch from '../../pages/Merch';
+import Orders from '../../pages/Orders';
 
 import Logo from '../../img/logo.svg';
 
@@ -33,6 +34,9 @@ const App = ({location: {pathname}}) => {
           <Item key='merch'>
             <Link to='/merch'>Товары</Link>
           </Item>
+          <Item key='orders'>
+            <Link to='/orders'>Заказы</Link>
+          </Item>
         </Menu>
       </Header>
       <Content style={{padding: '0 50px', marginTop: 64}}>
@@ -40,9 +44,10 @@ const App = ({location: {pathname}}) => {
           <Route path={['/', '/matches']} exact component={Matches}/>
           <Route path='/rivals' exact component={Rivals}/>
           <Route path='/merch' exact component={Merch}/>
+          <Route path='/orders' exact component={Orders}/>
         </div>
       </Content>
-      <Footer style={{textAlign: 'center'}}>tweek4000@yandex.ru ©2019</Footer>
+      <Footer style={{textAlign: 'center'}}>tweek4000@yandex.ru © 2019</Footer>
     </Layout>
   );
 };

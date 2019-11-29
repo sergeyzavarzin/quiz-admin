@@ -83,6 +83,7 @@ class Rivals extends React.Component {
     const {rivals, isAppLoaded} = this.props.context.state;
     return (
       <div className='rivals'>
+        <h1>Соперники</h1>
         <Table
           dataSource={rivals}
           columns={this.columns()}

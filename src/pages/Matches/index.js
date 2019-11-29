@@ -386,9 +386,10 @@ class Matches extends React.Component {
     const {CreateMatchForm, MatchResultsForm} = this;
     return (
       <div className='rivals'>
+        <h1>Матчи</h1>
         <Table
           loading={!isAppLoaded}
-          dataSource={matches}
+          dataSource={matches.sort((a, b) => moment.utc(b.startDateTime).diff(moment.utc(a.startDateTime)))}
           columns={this.renderColumns()}
           rowKey={(record) => record.id}
         />

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import { BASE_API_URL } from '../../constants/endpoints';
+import {BASE_API_URL} from '../../constants/endpoints';
 
 import {TYPES} from '../../constants/merchTypes';
 
@@ -14,6 +14,7 @@ class AppProvider extends Component {
     rivals: [],
     matches: [],
     merch: [],
+    orders: [],
   };
 
   componentDidMount() {
@@ -21,9 +22,9 @@ class AppProvider extends Component {
   }
 
   loadAppData = () => {
-    const {fetchMatches, fetchRivals, fetchMerch} = this;
-    Promise.all([fetchMatches(), fetchRivals(), fetchMerch()])
-      .then(([matches, rivals, merch]) => this.setState({matches, rivals, merch}))
+    const {fetchMatches, fetchRivals, fetchMerch, fetchOrders} = this;
+    Promise.all([fetchMatches(), fetchRivals(), fetchMerch(), fetchOrders()])
+      .then(([matches, rivals, merch, orders]) => this.setState({matches, rivals, merch, orders}))
       .finally(() => this.setState({isAppLoaded: true}))
   };
 
@@ -40,6 +41,11 @@ class AppProvider extends Component {
   fetchMerch = async () => {
     const rivals = await axios.get(`${BASE_API_URL}/merch`);
     return rivals.data;
+  };
+
+  fetchOrders = async () => {
+    const orders = await axios.get(`${BASE_API_URL}/order`);
+    return orders.data;
   };
 
   createRival = (id, name, logo, cb) => {
@@ -87,8 +93,8 @@ class AppProvider extends Component {
     axios
       .post(`${BASE_API_URL}/merch/create`, data)
       .then(({data}) => this.setState(prevState => {
-        return {merch: [data, ...prevState.merch]}
-      }, () => type === TYPES.DIGITAL ?
+          return {merch: [data, ...prevState.merch]}
+        }, () => type === TYPES.DIGITAL ?
         this.createDigitalMerchValues(id, values, cb) : (!!cb && cb())
       ))
       .catch(err => console.log(err));
@@ -117,7 +123,7 @@ class AppProvider extends Component {
       }))
   };
 
-  deleteRival= (id) => {
+  deleteRival = (id) => {
     axios
       .post(`${BASE_API_URL}/rival/${id}/delete`)
       .then(() => this.setState(({rivals}) => {
@@ -150,6 +156,19 @@ class AppProvider extends Component {
       .finally(() => cb && cb());
   };
 
+  changeOrderStatus = (id, status, cb) => {
+    axios
+      .post(`${BASE_API_URL}/order/${id}/update`, {status})
+      .then(({data}) => {
+        this.setState(prevState => {
+          return {
+            orders: prevState.orders.map(item => item.id === data.id ? data : item)
+          }
+        }, () => cb && cb());
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <AppContext.Provider
@@ -168,6 +187,7 @@ class AppProvider extends Component {
           deleteRival: this.deleteRival,
 
           setMatchResults: this.setMatchResults,
+          changeOrderStatus: this.changeOrderStatus,
         }}
       >
         {this.props.children}
@@ -180,7 +200,7 @@ export function withAppContext(Component) {
   return function WrapperComponent(props) {
     return (
       <AppContext.Consumer>
-        {state => <Component {...props} context={state} />}
+        {state => <Component {...props} context={state}/>}
       </AppContext.Consumer>
     );
   };

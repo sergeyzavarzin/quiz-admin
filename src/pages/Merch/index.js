@@ -180,6 +180,7 @@ class Merch extends React.Component {
     const {merch, isAppLoaded} = this.props.context.state;
     return (
       <div className='merch'>
+        <h1>Товары</h1>
         <Table
           dataSource={merch}
           columns={this.columns()}
