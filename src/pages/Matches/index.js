@@ -302,8 +302,8 @@ class Matches extends React.Component {
               type='text'
               placeholder='Вбрасывание выиграла команда'
             >
-              <Option key={0}>Зенит</Option>
-              <Option key={1}>{rival.name}</Option>
+              <Option value={1}>Зенит</Option>
+              <Option value={0}>{rival.name}</Option>
             </Select>,
           )}
         </Form.Item>

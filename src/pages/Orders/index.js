@@ -123,7 +123,7 @@ class Orders extends React.Component {
   };
 
   additionalInfoRender = record => {
-    const {merch, country, city, address, postIndex, email, phone} = record;
+    const {merch, country, city, address, postIndex, email, phone, comment} = record;
     return (
       <div className='order__info'>
         {
@@ -137,6 +137,9 @@ class Orders extends React.Component {
         }
         {
           phone && <div><b>Телефон:</b> {phone}</div>
+        }
+        {
+          comment && <div><b>Комментарий к заказу:</b> {comment}</div>
         }
       </div>
     )
@@ -192,7 +195,6 @@ class Orders extends React.Component {
       </Form>
     )
   });
-
 
   render() {
     const {ChangeOrderStatusForm} = this;
