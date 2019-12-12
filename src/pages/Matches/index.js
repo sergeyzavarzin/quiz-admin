@@ -202,13 +202,17 @@ class Matches extends React.Component {
           )}
         </Form.Item>
         <Form.Item>
-          {getFieldDecorator('buyTicketsUrl')(
+          {getFieldDecorator('buyTicketsUrl', {
+            initialValue: 'https://tickets.fc-zenit.ru/#basketball',
+          })(
             <Input
               type='text'
               placeholder='Ссылка на покупку билета на матч'
+              allowClear
             />,
           )}
         </Form.Item>
+        <div style={{fontSize: 12, marginTop: -10}}>Note: Удалите ссылку из поля если купить билеты нельзя</div>
         <Form.Item>
           <Button
             type='primary'
