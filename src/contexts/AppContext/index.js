@@ -15,6 +15,7 @@ class AppProvider extends Component {
     matches: [],
     merch: [],
     orders: [],
+    statistics: null,
   };
 
   componentDidMount() {
@@ -22,9 +23,9 @@ class AppProvider extends Component {
   }
 
   loadAppData = () => {
-    const {fetchMatches, fetchRivals, fetchMerch, fetchOrders} = this;
-    Promise.all([fetchMatches(), fetchRivals(), fetchMerch(), fetchOrders()])
-      .then(([matches, rivals, merch, orders]) => this.setState({matches, rivals, merch, orders}))
+    const {fetchMatches, fetchRivals, fetchMerch, fetchOrders, fetchStatistics} = this;
+    Promise.all([fetchMatches(), fetchRivals(), fetchMerch(), fetchOrders(), fetchStatistics()])
+      .then(([matches, rivals, merch, orders, statistics]) => this.setState({matches, rivals, merch, orders, statistics}))
       .finally(() => this.setState({isAppLoaded: true}))
   };
 
@@ -46,6 +47,11 @@ class AppProvider extends Component {
   fetchOrders = async () => {
     const orders = await axios.get(`${BASE_API_URL}/order`);
     return orders.data;
+  };
+
+  fetchStatistics = async () => {
+    const statistics = await axios.get(`${BASE_API_URL}/statistics`);
+    return statistics.data;
   };
 
   createRival = (id, name, logo, cb) => {

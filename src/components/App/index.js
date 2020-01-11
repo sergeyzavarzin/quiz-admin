@@ -7,6 +7,7 @@ import Matches from '../../pages/Matches';
 import Rivals from '../../pages/Rivals';
 import Merch from '../../pages/Merch';
 import Orders from '../../pages/Orders';
+import Statistics from '../../pages/Statistics';
 
 import Logo from '../../img/logo.svg';
 
@@ -25,6 +26,9 @@ const App = ({location: {pathname}}) => {
           defaultOpenKeys={[pathname.slice(1)]}
           style={{lineHeight: '64px', float: 'right'}}
         >
+          <Item key='statistics'>
+            <Link to='/statistics'>Статистика</Link>
+          </Item>
           <Item key='matches'>
             <Link to='/matches'>Матчи</Link>
           </Item>
@@ -45,6 +49,7 @@ const App = ({location: {pathname}}) => {
           <Route path='/rivals' exact component={Rivals}/>
           <Route path='/merch' exact component={Merch}/>
           <Route path='/orders' exact component={Orders}/>
+          <Route path='/statistics' exact component={Statistics}/>
         </div>
       </Content>
       <Footer style={{textAlign: 'center'}}>tweek4000@yandex.ru © 2019</Footer>

@@ -29,6 +29,7 @@ class Matches extends React.Component {
 
   renderColumns = () => {
     const {deleteMatch} = this.props.context;
+    const {statistics} = this.props.context.state;
     return [
       {
         title: 'Соперник',
@@ -111,6 +112,13 @@ class Matches extends React.Component {
             twoToneColor={!!tossing ? '#52c41a' : 'red'}
             style={{fontSize: '28px'}}
           /> : <></>
+      },
+      {
+        title: 'Пролосовали',
+        dataIndex: 'hasVote',
+        render: (text, {id}) => (
+          <span>{statistics.matches.find(({match}) => match === id).voteAnswers}</span>
+        )
       },
       {
         title: 'Действия',
@@ -396,6 +404,7 @@ class Matches extends React.Component {
           dataSource={matches.sort((a, b) => moment.utc(b.startDateTime).diff(moment.utc(a.startDateTime)))}
           columns={this.renderColumns()}
           rowKey={(record) => record.id}
+          pagination={{pageSize: 20}}
         />
         <Button
           type='primary'
