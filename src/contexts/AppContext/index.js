@@ -19,7 +19,9 @@ class AppProvider extends Component {
   };
 
   componentDidMount() {
-    this.loadAppData();
+    if (localStorage.getItem('isAuth')) {
+      this.loadAppData();
+    }
   }
 
   loadAppData = () => {

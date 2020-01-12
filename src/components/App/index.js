@@ -1,6 +1,6 @@
 import React from 'react';
 import {withRouter, Route, Link} from 'react-router-dom';
-import {Layout, Menu} from 'antd';
+import {Layout, Menu, Button} from 'antd';
 import 'antd/dist/antd.css';
 
 import Matches from '../../pages/Matches';
@@ -8,6 +8,7 @@ import Rivals from '../../pages/Rivals';
 import Merch from '../../pages/Merch';
 import Orders from '../../pages/Orders';
 import Statistics from '../../pages/Statistics';
+import Login from '../../pages/Login';
 
 import Logo from '../../img/logo.svg';
 
@@ -15,7 +16,13 @@ const {Header, Content, Footer} = Layout;
 const {Item} = Menu;
 
 const App = ({location: {pathname}}) => {
-  return (
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
+  return ( localStorage.getItem('isAuth') === 'true' ?
     <Layout style={{minHeight: '100vh'}}>
       <Header style={{position: 'fixed', zIndex: 1, width: '100%'}}>
         <img className='logo' src={Logo} alt='Зенит' style={{width: 80}}/>
@@ -41,6 +48,13 @@ const App = ({location: {pathname}}) => {
           <Item key='orders'>
             <Link to='/orders'>Заказы</Link>
           </Item>
+          <Button
+            type='danger'
+            onClick={logout}
+            style={{marginLeft: 15}}
+          >
+            Выход
+          </Button>
         </Menu>
       </Header>
       <Content style={{padding: '0 50px', marginTop: 64}}>
@@ -53,7 +67,7 @@ const App = ({location: {pathname}}) => {
         </div>
       </Content>
       <Footer style={{textAlign: 'center'}}>tweek4000@yandex.ru © 2019</Footer>
-    </Layout>
+    </Layout> : <Login/>
   );
 };
 
