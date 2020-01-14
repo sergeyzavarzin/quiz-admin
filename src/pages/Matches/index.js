@@ -116,9 +116,12 @@ class Matches extends React.Component {
       {
         title: 'Пролосовали',
         dataIndex: 'hasVote',
-        render: (text, {id}) => (
-          <span>{statistics.matches.find(({match}) => match === id).voteAnswers}</span>
-        )
+        render: (text, {id}) => {
+          const stat = statistics.matches.find(({match}) => match === id);
+          return stat && (
+            <span>{stat.voteAnswers}</span>
+          )
+        }
       },
       {
         title: 'Действия',
