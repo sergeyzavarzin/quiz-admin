@@ -29,7 +29,6 @@ class Matches extends React.Component {
 
   renderColumns = () => {
     const {deleteMatch} = this.props.context;
-    const {statistics} = this.props.context.state;
     return [
       {
         title: 'Соперник',
@@ -112,16 +111,6 @@ class Matches extends React.Component {
             twoToneColor={!!tossing ? '#52c41a' : 'red'}
             style={{fontSize: '28px'}}
           /> : <></>
-      },
-      {
-        title: 'Пролосовали',
-        dataIndex: 'hasVote',
-        render: (text, {id}) => {
-          const stat = statistics.matches.find(({match}) => match === id);
-          return stat && (
-            <span>{stat.voteAnswers}</span>
-          )
-        }
       },
       {
         title: 'Действия',
