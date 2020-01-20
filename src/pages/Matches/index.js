@@ -203,7 +203,7 @@ class Matches extends React.Component {
         </Form.Item>
         <Form.Item>
           {getFieldDecorator('buyTicketsUrl', {
-            initialValue: 'https://tickets.fc-zenit.ru/#basketball',
+            initialValue: 'https://tickets.fc-zenit.ru/basketball/tickets/#basketball&utm_campaign=prilozhenie',
           })(
             <Input
               type='text'
