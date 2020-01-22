@@ -8,6 +8,7 @@ import Rivals from '../../pages/Rivals';
 import Merch from '../../pages/Merch';
 import Orders from '../../pages/Orders';
 import Statistics from '../../pages/Statistics';
+import Notifications from '../../pages/Notifications';
 import Login from '../../pages/Login';
 
 import Logo from '../../img/logo.svg';
@@ -33,6 +34,9 @@ const App = ({location: {pathname}}) => {
           defaultOpenKeys={[pathname.slice(1)]}
           style={{lineHeight: '64px', float: 'right'}}
         >
+          <Item key='notifications'>
+            <Link to='/notifications'>Уведомления</Link>
+          </Item>
           <Item key='statistics'>
             <Link to='/statistics'>Статистика</Link>
           </Item>
@@ -64,6 +68,7 @@ const App = ({location: {pathname}}) => {
           <Route path='/merch' exact component={Merch}/>
           <Route path='/orders' exact component={Orders}/>
           <Route path='/statistics' exact component={Statistics}/>
+          <Route path='/notifications' exact component={Notifications}/>
         </div>
       </Content>
       <Footer style={{textAlign: 'center'}}>tweek4000@yandex.ru © 2019</Footer>

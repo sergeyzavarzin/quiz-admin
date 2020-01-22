@@ -4,6 +4,7 @@ import axios from 'axios';
 import {BASE_API_URL} from '../../constants/endpoints';
 
 import {TYPES} from '../../constants/merchTypes';
+import {queryParams} from '../../utils/queryParams';
 
 export const AppContext = React.createContext(true);
 
@@ -15,6 +16,8 @@ class AppProvider extends Component {
     matches: [],
     merch: [],
     orders: [],
+    notifications: [],
+    notificationList: [17188634, 127017464, 3918082],
     statistics: null,
   };
 
@@ -175,6 +178,29 @@ class AppProvider extends Component {
         }, () => cb && cb());
       })
       .catch(err => console.log(err));
+  };
+
+  fetchNotifications = async () => {
+    const notifications = await axios.get(`${BASE_API_URL}/notifications`);
+    this.setState({notifications: notifications.data});
+  };
+
+  fetchNotificationList = async () => {
+    const notifications = await axios.get(`${BASE_API_URL}/user/notifications`);
+    this.setState({notifications: notifications.data});
+  };
+
+  createNotification = async message => {
+    const urlParams = queryParams({
+      message,
+      v: '5.103',
+      group_id: '74457752',
+      user_ids: this.state.notificationList.reduce((acc, curr) => acc + ',' + curr, '').slice(0, -1),
+      access_token: '837c72b9837c72b9837c72b9ff8311feae8837c837c72b9ded1a1138037778cbe3cc363',
+    });
+    const url = `https://api.vk.com/method/notifications.sendMessage?${urlParams}`;
+    const sendedNotification = await axios.get(url);
+    console.log(sendedNotification);
   };
 
   render() {
