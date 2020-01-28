@@ -23,35 +23,43 @@ const App = ({location: {pathname}}) => {
     window.location.reload();
   };
 
-  return ( localStorage.getItem('isAuth') === 'true' ?
+  return localStorage.getItem('isAuth') === 'true' ?
     <Layout style={{minHeight: '100vh'}}>
       <Header style={{position: 'fixed', zIndex: 1, width: '100%'}}>
         <img className='logo' src={Logo} alt='Зенит' style={{width: 80}}/>
-        <Menu
-          theme='dark'
-          mode='horizontal'
-          defaultSelectedKeys={[pathname.slice(1)]}
-          defaultOpenKeys={[pathname.slice(1)]}
-          style={{lineHeight: '64px', float: 'right'}}
+        <div
+          style={{
+            float: 'right',
+            display: 'flex',
+            alignItems: 'center',
+          }}
         >
-          <Item key='notifications'>
-            <Link to='/notifications'>Уведомления</Link>
-          </Item>
-          <Item key='statistics'>
-            <Link to='/statistics'>Статистика</Link>
-          </Item>
-          <Item key='matches'>
-            <Link to='/matches'>Матчи</Link>
-          </Item>
-          <Item key='rivals'>
-            <Link to='/rivals'>Соперники</Link>
-          </Item>
-          <Item key='merch'>
-            <Link to='/merch'>Товары</Link>
-          </Item>
-          <Item key='orders'>
-            <Link to='/orders'>Заказы</Link>
-          </Item>
+          <Menu
+            theme='dark'
+            mode='horizontal'
+            defaultSelectedKeys={[pathname.slice(1)]}
+            defaultOpenKeys={[pathname.slice(1)]}
+            style={{lineHeight: '64px'}}
+          >
+            <Item key='notifications'>
+              <Link to='/notifications'>Уведомления</Link>
+            </Item>
+            <Item key='statistics'>
+              <Link to='/statistics'>Статистика</Link>
+            </Item>
+            <Item key='matches'>
+              <Link to='/matches'>Матчи</Link>
+            </Item>
+            <Item key='rivals'>
+              <Link to='/rivals'>Соперники</Link>
+            </Item>
+            <Item key='merch'>
+              <Link to='/merch'>Товары</Link>
+            </Item>
+            <Item key='orders'>
+              <Link to='/orders'>Заказы</Link>
+            </Item>
+          </Menu>
           <Button
             type='danger'
             onClick={logout}
@@ -59,7 +67,7 @@ const App = ({location: {pathname}}) => {
           >
             Выход
           </Button>
-        </Menu>
+        </div>
       </Header>
       <Content style={{padding: '0 50px', marginTop: 64}}>
         <div style={{padding: 24, marginTop: 30, background: '#fff', minHeight: 360}}>
@@ -72,8 +80,7 @@ const App = ({location: {pathname}}) => {
         </div>
       </Content>
       <Footer style={{textAlign: 'center'}}>tweek4000@yandex.ru © 2019</Footer>
-    </Layout> : <Login/>
-  );
+    </Layout> : <Login/>;
 };
 
 export default withRouter(App);
