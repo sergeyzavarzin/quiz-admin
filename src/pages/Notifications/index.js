@@ -59,7 +59,7 @@ class Notifications extends React.Component {
           notifications ?
           <List
             itemLayout="vertical"
-            dataSource={notifications}
+            dataSource={notifications.sort((a, b) => moment.utc(b.createDateTime).diff(moment.utc(a.createDateTime)))}
             renderItem={item => {
               const {initiator, successful, failed, total} = JSON.parse(item.info);
               return (
