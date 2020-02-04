@@ -89,11 +89,16 @@ class Merch extends React.Component {
       validateFields((err, {name, description, price, image, type, values, count}) => {
         if (!err) {
           const id = editingMerchId || createTranslitId(name.trim());
-          const action = editingMerchId ? updateMerch : createMerch;
           const cnt = values ? values.length : count || DEFAULT_MERCH_COUNT;
-          action(id, name.trim(), image, price, description, type, values, cnt, () => this.setState({
-            isModalVisible: false, editingMerchId: false
-          }));
+          if (editingMerchId) {
+            updateMerch(id, name.trim(), image, price, description, type, cnt, () => this.setState({
+              isModalVisible: false, editingMerchId: false
+            }));
+          } else {
+            createMerch(id, name.trim(), image, price, description, type, values, cnt, () => this.setState({
+              isModalVisible: false, editingMerchId: false
+            }));
+          }
         }
       });
     };

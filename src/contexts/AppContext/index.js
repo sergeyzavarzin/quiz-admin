@@ -77,9 +77,9 @@ class AppProvider extends Component {
       .finally(() => cb && cb());
   };
 
-  updateMerch = (id, name, image, price, description, type, cb = null) => {
+  updateMerch = (id, name, image, price, description, type, count, cb = null) => {
     axios
-      .post(`${BASE_API_URL}/merch/${id}/update`, {name, image, price, description, type})
+      .post(`${BASE_API_URL}/merch/${id}/update`, {name, image, price, description, type, count})
       .then(({data}) => this.setState(({merch}) => {
         return {merch: merch.map(item => item.id === data.id ? data : item)}
       }))

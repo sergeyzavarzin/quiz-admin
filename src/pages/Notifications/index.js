@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Button, List, Icon, Spin} from 'antd';
+import {Input, Button, List, Spin} from 'antd';
 
 import {withAppContext} from '../../contexts/AppContext';
 
