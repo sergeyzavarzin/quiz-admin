@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Button, Modal, Input, Form, Select, DatePicker, Tag, Icon, Popconfirm} from 'antd';
+import {Table, Button, Modal, Input, Form, Select, DatePicker, Tag, Icon, Popconfirm, Checkbox} from 'antd';
 import moment from 'moment';
 
 import createTranslitId from '../../utils/createTranslitId';
@@ -151,11 +151,11 @@ class Matches extends React.Component {
     const handleCreateMatch = (e) => {
       e.preventDefault();
       this.setState({isMatchPosting: true});
-      validateFields((err, {rivalId, place, startDateTime, buyTicketsUrl}) => {
+      validateFields((err, {rivalId, place, startDateTime, buyTicketsUrl, isPlayOff}) => {
         if (!err) {
           const FORMAT = 'DD-MM-YY-HH-mm-ss';
           const id = createTranslitId(`${rivals.find(rival => rival.id === rivalId).name}${moment(startDateTime).format(FORMAT)}`);
-          createMatch(id, rivalId, place, startDateTime, buyTicketsUrl, () => this.setState({
+          createMatch(id, rivalId, place, startDateTime, buyTicketsUrl, isPlayOff, () => this.setState({
             isMatchPosting: false, activeModal: null
           }))
         }
@@ -213,6 +213,15 @@ class Matches extends React.Component {
           )}
         </Form.Item>
         <div style={{fontSize: 12, marginTop: -10}}>Note: Удалите ссылку из поля если купить билеты нельзя</div>
+        <Form.Item>
+          {getFieldDecorator('isPlayOff', {
+            initialValue: false,
+          })(
+            <Checkbox>
+              Матч входит в play-off
+            </Checkbox>,
+          )}
+        </Form.Item>
         <Form.Item>
           <Button
             type='primary'

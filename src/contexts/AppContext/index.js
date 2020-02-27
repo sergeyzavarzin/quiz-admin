@@ -28,7 +28,13 @@ class AppProvider extends Component {
   loadAppData = () => {
     const {fetchMatches, fetchRivals, fetchMerch, fetchOrders, fetchStatistics} = this;
     Promise.all([fetchMatches(), fetchRivals(), fetchMerch(), fetchOrders(), fetchStatistics()])
-      .then(([matches, rivals, merch, orders, statistics]) => this.setState({matches, rivals, merch, orders, statistics}))
+      .then(([matches, rivals, merch, orders, statistics]) => this.setState({
+        matches,
+        rivals,
+        merch,
+        orders,
+        statistics
+      }))
       .finally(() => this.setState({isAppLoaded: true}))
   };
 
@@ -87,9 +93,9 @@ class AppProvider extends Component {
       .finally(() => cb && cb());
   };
 
-  createMatch = (id, rivalId, place, startDateTime, buyTicketsUrl, cb = null) => {
+  createMatch = (id, rivalId, place, startDateTime, buyTicketsUrl, isPlayOff, cb = null) => {
     axios
-      .post(`${BASE_API_URL}/match/create`, {id, rivalId, place, startDateTime, buyTicketsUrl})
+      .post(`${BASE_API_URL}/match/create`, {id, rivalId, place, startDateTime, buyTicketsUrl, isPlayOff})
       .then(({data}) => this.setState(prevState => {
         return {matches: [data, ...prevState.matches]}
       }))
@@ -188,7 +194,7 @@ class AppProvider extends Component {
       .post(`${BASE_API_URL}/notification`, {message})
       .then(response => this.setState(prevState => {
         return {
-          notifications: [ response.data.notificationData, ...prevState.notifications]
+          notifications: [response.data.notificationData, ...prevState.notifications]
         }
       }))
       .catch(error => console.log(error))
