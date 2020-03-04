@@ -38,7 +38,8 @@ class Matches extends React.Component {
           const rival = rivals.find(rival => rival.id === record.rivalId);
           return (
             <>
-              {rival && rival.name}
+              <div>{rival && rival.name}</div>
+              {record.isPlayOff && <Tag>PlayOff</Tag>}
             </>
           )
         }
