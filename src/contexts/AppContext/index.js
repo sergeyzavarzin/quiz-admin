@@ -220,7 +220,6 @@ class AppProvider extends Component {
           setMatchResults: this.setMatchResults,
           changeOrderStatus: this.changeOrderStatus,
 
-          fetchNotificationList: this.fetchNotificationList,
           fetchNotifications: this.fetchNotifications,
           createNotification: this.createNotification,
         }}
